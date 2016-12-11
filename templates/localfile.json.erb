@@ -1,0 +1,15 @@
+{
+  "api.version": "v1",
+  "source": {
+    "name": "<%= @source_name %>",
+    "description": "<%= @description %>",
+    "sourceType": "LocalFile",
+    "automaticDateParsing": <%= @auto_date_parsing %>
+    "multilineProcessingEnabled": <%= @multiline_processing %>,
+    "useAutolineMatching": <%= @auto_line_matching %>,
+    "forceTimeZone": <%= @force_timezone %>,
+    "timeZone": "<%= @timezone %>",
+    "category": "<%= @category %>",
+    "pathExpression": "<%= @path_expression %>"
+  }
+}

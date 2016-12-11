@@ -35,12 +35,12 @@
 # Authors
 # -------
 #
-# Author Name <author@domain.com>
+# Ryan Armstrong <ryan@cavaliercoder.com>
 #
 # Copyright
 # ---------
 #
-# Copyright 2016 Your name here, unless otherwise noted.
+# Copyright 2016 Ryan Armstrong.
 #
 class sumo (
   $package_manage = $::sumo::params::package_manage,
@@ -51,7 +51,18 @@ class sumo (
   $service_name   = $::sumo::params::service_name,
   $service_ensure = $::sumo::params::service_ensure,
   $service_enable = $::sumo::params::service_enable,
+
+  $config_manage  = $::sumo::params::config_manage,
+  $config_file    = $::sumo::params::config_file,
+  $sources_path   = $::sumo::params::config_sources_path,
+  $collector_name = $::sumo::params::config_collector_name,
+  $accessid       = $::sumo::params::config_accessid,
+  $accesskey      = $::sumo::params::config_accesskey,
+  $ephemeral      = $::sumo::params::config_ephemeral,
+
+  $timezone       = $::sumo::params::config_timezone,
 ) inherits sumo::params {
   class { '::sumo::install' : } ->
+  class { '::sumo::config' : } ->
   class { '::sumo::service' : }
 }
