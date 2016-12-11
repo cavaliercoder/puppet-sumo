@@ -1,0 +1,16 @@
+[Unit]
+Description=Sumo Logic Collector
+Documentation=https://help.sumologic.com/Send_Data/Installed_Collectors
+After=network.target remote-fs.target nss-lookup.target
+SourcePath=/etc/init.d/collector
+ 
+[Service]
+Type=forking
+TimeoutSec=5min
+KillMode=process
+GuessMainPID=no
+ExecStart=/etc/init.d/collector start
+ExecStop=/etc/init.d/collector stop
+ 
+[Install]
+WantedBy=multi-user.target
