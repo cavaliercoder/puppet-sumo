@@ -11,5 +11,15 @@
     "timeZone": "<%= @timezone %>",
     "category": "<%= @category %>",
     "pathExpression": "<%= @path_expression %>"
+    <% if @filters != [] -%>, "filters": [
+      <% @filters.each_with_index do |filter, i| %> {
+        "name": <%= filter['name'] %>,
+        "filterType": <%= filter['filterType'] %>,
+        "regexp": <%= filter['regexp'] %>,
+        <% if filter['mask'] -%>"mask": <%= filter['mask'] %>,<% end -%>
+        <% if filter['transparentForwarding'] -%>"transparentForwarding": <%= filter['transparentForwarding'] %>,<% end -%>
+      }<%= ',' if i < (@filters.size - 1) %><% end -%>
+    ] <% end -%>
   }
 }
+
