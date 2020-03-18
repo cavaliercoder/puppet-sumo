@@ -48,6 +48,5 @@ define sumo::localfile (
     selrole => 'object_r',
     seltype => 'etc_t',
     notify  => Service[$::sumo::service_name],
-    filters => $filters,
   }
 }
