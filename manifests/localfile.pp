@@ -1,22 +1,31 @@
 # install local file source
 # see: https://help.sumologic.com/Send_Data/Sources/03Use_JSON_to_Configure_Sources#Common_parameters_for_all_Source_types
 define sumo::localfile (
+  # common args
   $source_name          = $name,
+  $source_type          = 'LocalFile',
   $description          = undef,
   $ensure               = 'present',
   $category             = undef,
-  $path_expression      = undef,
   $auto_date_parsing    = true,
   $auto_line_matching   = true,
   $multiline_processing = true,
   $force_timezone       = false,
   $timezone             = $::sumo::timezone,
   $filters              = [],
+
+  # LocalFile args
+  $path_expression      = undef,
+
+  # DockerLog, DockerStats
+  $uri                  = 'unix:///var/run/docker.sock',
 ) {
   validate_string($source_name)
+  validate_string($source_type)
   validate_string($category)
   validate_string($path_expression)
   validate_array($filters)
+  validate_string($uri)
 
   $filters.each |$filter| {
     validate_hash($filter)

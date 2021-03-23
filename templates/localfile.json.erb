@@ -3,14 +3,18 @@
   "source": {
     "name": "<%= @source_name %>",
     "description": "<%= @description %>",
-    "sourceType": "LocalFile",
+    "sourceType": "<%= @source_type %>",
     "automaticDateParsing": <%= @auto_date_parsing %>,
     "multilineProcessingEnabled": <%= @multiline_processing %>,
     "useAutolineMatching": <%= @auto_line_matching %>,
     "forceTimeZone": <%= @force_timezone %>,
     "timeZone": "<%= @timezone %>",
-    "category": "<%= @category %>",
-    "pathExpression": "<%= @path_expression %>"
+    "category": "<%= @category %>"
+
+    <% if @source_type == 'LocalFile' -%>,
+      "pathExpression": "<%= @path_expression %>",
+    <% end -%>
+
     <% if @filters != [] -%>, "filters": [
       <% @filters.each_with_index do |filter, i| %> {
         "name": "<%= filter['name'] %>",
@@ -20,6 +24,23 @@
         <% if filter['transparentForwarding'] -%>"transparentForwarding": "<%= filter['transparentForwarding'] %>",<% end -%>
       }<%= ',' if i < (@filters.size - 1) %><% end -%>
     ] <% end -%>
+
+    <% if @source_type == 'DockerLog' -%>,
+      "uri": "<%= @uri %>",
+      "allContainers": true,
+      "collectEvents": true,
+      "specifiedContainers": [],
+      "certPath": ""
+    <% end -%>
+
+    <% if @source_type == 'DockerStats' -%>,
+      "uri": "<%= @uri %>",
+      "allContainers": true,
+      "specifiedContainers": [],
+      "cutoffTimestamp": 0,
+      "certPath": "",
+      "pollInterval": 60000
+    <% end -%>
   }
 }
 
